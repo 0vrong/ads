@@ -38,17 +38,19 @@
             if(response.message)
                 alert(response.message);
 
+            const orders = response.repo;
             orders.forEach(o => {
                 let tr = document.createElement("tr");
 
                 tr.innerHTML = `
                     <td>${o.number}</td>
-                    <td>${o.startDAte}</td>
+                    <td>${o.startDate}</td>
+                    <td>${o.endDate}</td> 
                     <td>${o.device}</td>      
-                    <td>${o.problemtype}</td> 
+                    <td>${o.problemType}</td> 
                     <td>${o.description}</td> 
                     <td>${o.client}</td>      
-                    <td>${o.status}</td>      
+                    <td>${o.status}</td>     
                     <td>${o.master}</td>
                     <td>${o.comments}</td>`;
 
@@ -62,7 +64,6 @@
             GetOrders(param)
 
         }
-
     </script>
 </body>
 </html>

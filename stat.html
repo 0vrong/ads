@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Document</title>
+    <title>статистика</title>
 </head>
 <body>
     <a href="create.html">создание заявки</a>
@@ -28,23 +28,25 @@
 
     get_stat();
 
-    async function get_stat()
-    {
+    async function get_stat() {
         let data = await fetch("https://localhost:7242/avg");
         let stat = await data.json();
-        
-        CompleteCount.append(stat.CompleteCount);
-        GetAverage.append(stat.GetAverage)
 
-        for(var key of Object.keys(stat.GetProblemTypeStat)){
+        
+        CompleteCount.textContent = stat.completeCount;  
+        GetAverage.textContent = stat.getAverage;  
+
+
+        for (var key of Object.keys(stat.getproblemtypestat)) {
             let tr = document.createElement("tr");
 
-            tr.innerHTML =`
-            <td>${key}</td>
-            <td>${stat.GetProblemTypeStat[key]}</td>`
+            tr.innerHTML = `
+                <td>${key}</td>
+                <td>${stat.getproblemtypestat[key]}</td>`;
 
             stat_table.append(tr);
         }
     }
+
 </script>
 </html>
