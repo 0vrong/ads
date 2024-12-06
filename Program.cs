@@ -21,7 +21,7 @@ app.MapGet("orders", (int param = 0) =>
     return new { repo, message = buffer };
 });
 app.MapGet("add", ([AsParameters] Order dto) => repo.Add(dto));
-app.MapPut("update", ([AsParameters] UpdateOrderDTO dto) =>
+app.MapGet("update", ([AsParameters] UpdateOrderDTO dto) =>
 {
     var order = repo.Find(x => x.Number == dto.Number);
     if (order == null)
@@ -30,7 +30,7 @@ app.MapPut("update", ([AsParameters] UpdateOrderDTO dto) =>
     {
         order.Status = dto.Status;
         message += $"Статус заявки {order.Number} изменен";
-        if (order.Status == "выполнен")
+        if (order.Status == "выполнено")
         {
             message += $"Заявка {order.Number} завершена";
             order.EndDate = DateOnly.FromDateTime(DateTime.Now);
@@ -63,7 +63,7 @@ app.MapGet("avg", () =>new
      completeCount = CompleteCount(),
      getproblemtypestat = GetProblemTypeStat(),
      GetAverage = GetAverage()
- });
+});
 
 app.Run();
 
